@@ -4,6 +4,7 @@
 //Logger* pLogger = nullptr;
 
 #include "sendIR.h"
+#include "display.h"
 #include "runGame.h"
 #include "receiveIR.h"
 #include "buttonListener.h"
@@ -14,7 +15,8 @@ int main( void ){
     hwlib::wait_ms( 500 );
 
     auto irSend = sendIR();
-    auto runGame = runGameControl(irSend);
+    auto scherm = display();
+    auto runGame = runGameControl(irSend, scherm);
     auto receive = receiveIR(runGame);
     auto buttons = buttonListener(runGame);
 

@@ -12,7 +12,7 @@
 SOURCES :=
 
 # header files in this project
-HEADERS := runGame.h sendIR.h receiveIR.h buttonListener.h
+HEADERS := runGame.h sendIR.h receiveIR.h buttonListener.h display.h
 
 # other places to look for files for this project
 SEARCH  := 

@@ -2,6 +2,7 @@
 #define V2THDE_EXAMPLES_RUNGAME_H
 
 #include "sendIR.h"
+#include "display.h"
 
 class runGameControl : public rtos::task <>{
 private:
@@ -15,7 +16,7 @@ private:
     rtos::pool <int> HitPlayerPool;
     rtos::flag hitFlag;
     rtos::channel<int, 1> buttonChannel;
-
+    display & scherm;
 
     void main() {
         for (;;) {
@@ -24,7 +25,9 @@ private:
                     hwlib::wait_ms(100);
                     auto evt = wait(hitFlag+buttonChannel);
                     if (evt == hitFlag) {
-                        hwlib::cout << "hit by: " << HitPlayerPool.read() << "\nWith power: " << HitPowerPool.read() << "\n\n";
+                        int playerIDtmp = HitPlayerPool.read();
+                        int powertmp = HitPowerPool.read();
+                        scherm.setDisplayFlag(playerIDtmp, powertmp);
                         state = NORMAAL;
                         break;
                     }
@@ -48,13 +51,14 @@ private:
 
 public:
 
-    runGameControl(sendIR & IR):
+    runGameControl(sendIR & IR, display & scherm):
             rtos::task<>("RunGameTask"),
             IR(IR),
             HitPowerPool("HitPowerPool"),
             HitPlayerPool("HitPlayerPool"),
             hitFlag(this, "hitFlag"),
-            buttonChannel(this, "buttonID")
+            buttonChannel(this, "buttonID"),
+            scherm(scherm)
     {}
 
     void buttonPressed(int buttonID){
