@@ -79,12 +79,14 @@ public:
                     auto evt = wait(displayFlag);
                     if(evt == displayFlag){
                         state = SHOW;
+                        break;
                     }
                     hwlib::wait_ms(500);
                 }
                 case SHOW: {
                     hitBy();
                     state = IDLE;
+                    break;
                 }
             }
         }
