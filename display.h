@@ -55,7 +55,7 @@ public:
     {}
 
 
-    /// brief sets screen to display which player shot you and with what weaponPower
+    /// @brief sets screen to display which player shot you and with what weaponPower
     void hitBy(){
         clearDisplay();
         d1 << "\f"
@@ -76,7 +76,7 @@ public:
         update();
     }
 
-    /// @brief runs the display object. waits for the display flag to change.  
+    /// @brief runs the display object. waits for the display flag to change.
     void main(){
         ingame();
         for(;;){
