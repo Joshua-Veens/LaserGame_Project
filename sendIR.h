@@ -51,11 +51,14 @@ private:
 
 
 public:
+    /// @brief contructor for the sendIR class
     sendIR():
             rtos::task<>("sendIRMessage"),
             shootFlag(this, "shootFlag")
     {}
 
+    /// @brief sets  the shoot flag to send the IR message
+    /// @param data data contains the data send with the IR message
     void setShoot(uint16_t data){
         Data = data;
         shootFlag.set();
