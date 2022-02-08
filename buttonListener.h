@@ -9,10 +9,15 @@ private:
     runGameControl & runGame;
 
 public:
+    /// @brief constructor of the buttonlistener class
+    /// @param runGame the buttonListener class needs a reference of runGameControl
     buttonListener(runGameControl & runGame):
             rtos::task<>( "buttonListenerTask"),
             runGame(runGame)
     {}
+
+    /// @brief checks constantly if button is pressed,
+    /// when button is pressed calls function buttonPressed from the runGame class
     void main() {
         for (;;) {
             if (trigger.read()== 0) {
