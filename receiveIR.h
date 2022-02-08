@@ -76,6 +76,9 @@ public:
     uint8_t playerID;
     uint8_t weaponPower;
     uint8_t playtime;
+
+    /// @brief the  constructor  for the   receive  IR class
+    /// @param rungame it needs a instance of runGameControl to set some variables and call some function
     receiveIR(runGameControl & rungame):
             rtos::task<>("receiveIRTaak"),
             rungame(rungame)
